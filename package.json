@@ -7,9 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "start-kitchen": "node microservices/kitchen/kitchen.js",
-    "start-delivery": "node microservices/delivery/delivery.js",
-    "start-payment": "node microservices/payment/payment.js",
+    "start-kitchen": "cd microservices/kitchen && node -r ./dotenv.config.js kitchen.js",
+    "start-delivery": "cd microservices/delivery && node -r ./dotenv.config.js delivery.js",
+    "start-payment": "cd microservices/payment && node -r ./dotenv.config.js payment.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
