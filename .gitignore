@@ -1,0 +1,6 @@
+node_modules/
+build/
+dist/
+logs/
+spotify_tracks.json
+yarn.error.log
