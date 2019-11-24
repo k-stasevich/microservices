@@ -1,5 +1,6 @@
 const express = require('express');
-const { initMessageBroker } = require('./message-broker');
+const { initMessageBroker, getChannel, MAIN_QUEUE } = require('../message-broker');
+
 const app = express();
 
 app.get('/', function(req, res) {
@@ -11,4 +12,16 @@ initMessageBroker().then(() => {
   app.listen(PORT, function() {
     console.log(`Orders app listening on port ${PORT}!`);
   });
+
+  const channel = getChannel();
+
+  channel.consume(
+    MAIN_QUEUE,
+    function(msg) {
+      console.log(' [x] Received %s', msg.content.toString());
+    },
+    {
+      noAck: true,
+    },
+  );
 });

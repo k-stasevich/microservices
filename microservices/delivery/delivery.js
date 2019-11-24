@@ -1,5 +1,5 @@
 const express = require('express');
-const { initMessageBroker } = require('./message-broker');
+const { initMessageBroker } = require('../message-broker');
 
 const app = express();
 
