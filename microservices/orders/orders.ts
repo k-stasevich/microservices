@@ -1,7 +1,6 @@
-const express = require('express');
-const { initMessageBroker, getChannel, MAIN_QUEUE } = require('../message-broker');
-const { createCreateOrder } = require('../events');
-const { ORDER_STATUSES } = require('./order-statuses');
+import express from 'express';
+import { initMessageBroker, getChannel, MAIN_QUEUE } from '../message-broker';
+import { eventFactory } from './../events';
 
 const app = express();
 
@@ -11,7 +10,7 @@ app.post('/order', function(req, res) {
   const orderId = 1;
   channel.sendToQueue(
     MAIN_QUEUE,
-    Buffer.from(JSON.stringify(createCreateOrder(orderId))),
+    Buffer.from(JSON.stringify(eventFactory.createOrder(orderId))),
   );
 
   res.send('Hello World!');

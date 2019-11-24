@@ -7,10 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "start-gateway": "cd microservices/gateway && node -r ./dotenv.config.js gateway.js",
-    "start-kitchen": "cd microservices/kitchen && node -r ./dotenv.config.js kitchen.js",
-    "start-delivery": "cd microservices/delivery && node -r ./dotenv.config.js delivery.js",
-    "start-orders": "cd microservices/orders && node -r ./dotenv.config.js orders.js",
+    "start-kitchen": "cd microservices/kitchen && ts-node-dev --respawn -r ./dotenv.config.js kitchen.ts",
+    "start-delivery": "cd microservices/delivery && ts-node-dev --respawn -r ./dotenv.config.js delivery.ts",
+    "start-orders": "cd microservices/orders && ts-node-dev --respawn -r ./dotenv.config.js orders.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -20,5 +19,10 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "micromq": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.12",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.2"
   }
 }

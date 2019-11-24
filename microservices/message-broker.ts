@@ -1,12 +1,10 @@
 const amqp = require('amqplib/callback_api');
 
-const MAIN_QUEUE = 'MAIN_QUEUE';
+export const MAIN_QUEUE = 'MAIN_QUEUE';
 
 let msgBrokerChannel;
 
-module.exports.MAIN_QUEUE = MAIN_QUEUE;
-
-module.exports.initMessageBroker = () => {
+export const initMessageBroker = () => {
   return new Promise(resolve => {
     amqp.connect(process.env.RABBIT_URL, function(error0, connection) {
       if (error0) {
@@ -28,4 +26,4 @@ module.exports.initMessageBroker = () => {
   });
 };
 
-module.exports.getChannel = () => msgBrokerChannel;
+export const getChannel = () => msgBrokerChannel;

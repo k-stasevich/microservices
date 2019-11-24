@@ -1,5 +1,5 @@
-const express = require('express');
-const { initMessageBroker, getChannel, MAIN_QUEUE } = require('../message-broker');
+import express from 'express';
+import { initMessageBroker, getChannel, MAIN_QUEUE } from '../message-broker';
 
 const app = express();
 
@@ -17,11 +17,9 @@ initMessageBroker().then(() => {
 
   channel.consume(
     MAIN_QUEUE,
-    function(msg) {
+    msg => {
       console.log(' [x] Received %s', msg.content.toString());
     },
-    {
-      noAck: true,
-    },
+    { noAck: true },
   );
 });
