@@ -7,15 +7,18 @@
     "doc": "docs"
   },
   "scripts": {
+    "start-gateway": "cd microservices/gateway && node -r ./dotenv.config.js gateway.js",
     "start-kitchen": "cd microservices/kitchen && node -r ./dotenv.config.js kitchen.js",
     "start-delivery": "cd microservices/delivery && node -r ./dotenv.config.js delivery.js",
-    "start-payment": "cd microservices/payment && node -r ./dotenv.config.js payment.js",
+    "start-orders": "cd microservices/orders && node -r ./dotenv.config.js orders.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "amqplib": "^0.5.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "micromq": "^3.0.2"
   }
 }

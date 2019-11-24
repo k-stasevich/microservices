@@ -1,4 +1,6 @@
 const express = require('express');
+const { initMessageBroker } = require('./message-broker');
+
 const app = express();
 
 app.get('/', function(req, res) {
@@ -6,6 +8,9 @@ app.get('/', function(req, res) {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, function() {
-  console.log(`Delivery app listening on port ${PORT}!`);
+
+initMessageBroker().then(() => {
+  app.listen(PORT, function() {
+    console.log(`Orders app listening on port ${PORT}!`);
+  });
 });

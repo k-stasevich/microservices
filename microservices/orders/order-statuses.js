@@ -1,0 +1,5 @@
+module.exports.ORDER_STATUSES = {
+  PENDING: 'PENDING',
+  RESOLVED: 'RESOLVED',
+  REJECTED: 'REJECTED',
+};
