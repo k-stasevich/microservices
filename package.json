@@ -7,20 +7,26 @@
     "doc": "docs"
   },
   "scripts": {
-    "start-kitchen": "cd microservices/kitchen && ts-node-dev --respawn -r ./dotenv.config.js kitchen.ts",
-    "start-delivery": "cd microservices/delivery && ts-node-dev --respawn -r ./dotenv.config.js delivery.ts",
-    "start-orders": "cd microservices/orders && ts-node-dev --respawn -r ./dotenv.config.js orders.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-kitchen": "cd microservices/kitchen && ts-node-dev --respawn --no-notify -r ./dotenv.config.js kitchen.ts",
+    "start-delivery": "cd microservices/delivery && ts-node-dev --respawn --no-notify -r ./dotenv.config.js delivery.ts",
+    "start-orders": "cd microservices/orders && ts-node-dev --respawn --no-notify -r ./dotenv.config.js orders.ts",
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "amqplib": "^0.5.5",
+    "axios": "^0.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jest": "^24.9.0",
     "micromq": "^3.0.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.4",
+    "@types/jest": "^24.0.23",
     "@types/node": "^12.12.12",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.7.2"
