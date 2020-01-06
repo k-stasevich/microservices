@@ -1,0 +1,11 @@
+version: '3.4'
+services:
+  mongodb:
+    container_name: ms-mongo
+    image: mongo
+    ports:
+      - 2200:27017
+    restart: always
+    entrypoint: ['/usr/bin/mongod', '--bind_ip_all']
+    volumes:
+      - ./volume/1:/data/db # This is where your volume will persist. e.g. VOLUME-DIR = ./volumes/mongodb

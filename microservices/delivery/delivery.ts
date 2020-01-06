@@ -1,3 +1,4 @@
+import { connectDB } from './../db-connect';
 import express from 'express';
 import { initMessageBroker } from './../message-broker';
 import bodyParser from 'body-parser';
@@ -16,9 +17,14 @@ app.post('/deliver', async (req: IDeliverRequest, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+const { DB_URL, DB_NAME } = process.env;
 
-initMessageBroker().then(() => {
+Promise.all([
+  //
+  initMessageBroker(),
+  connectDB(DB_URL as string, DB_NAME as string),
+]).then(async db => {
   app.listen(PORT, function() {
-    console.log(`Orders app listening on port ${PORT}!`);
+    console.log(`Delivery app listening on port ${PORT}!`);
   });
 });

@@ -21,12 +21,15 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jest": "^24.9.0",
-    "micromq": "^3.0.2"
+    "micromq": "^3.0.2",
+    "mongodb": "^3.4.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-typescript": "^7.7.4",
+    "@types/amqplib": "^0.5.13",
     "@types/jest": "^24.0.23",
+    "@types/mongodb": "^3.3.14",
     "@types/node": "^12.12.12",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.7.2"
