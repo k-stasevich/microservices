@@ -2,7 +2,7 @@ import amqp, { Channel } from 'amqplib/callback_api';
 
 export const MAIN_QUEUE = 'MAIN_QUEUE';
 
-let msgBrokerChannel: Channel;
+let mainChannel: Channel;
 
 export const initMessageBroker = () => {
   return new Promise((resolve, reject) => {
@@ -14,7 +14,7 @@ export const initMessageBroker = () => {
       connection.createChannel((error1, channel: Channel) => {
         if (error1) return reject(error1);
 
-        msgBrokerChannel = channel;
+        mainChannel = channel;
 
         channel.assertQueue(MAIN_QUEUE, {
           durable: false,
@@ -26,4 +26,4 @@ export const initMessageBroker = () => {
   });
 };
 
-export const getChannel = () => msgBrokerChannel;
+export const getMainChannel = () => mainChannel;

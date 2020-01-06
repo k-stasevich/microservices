@@ -1,5 +1,0 @@
-export const ORDER_STATUSES = {
-  PENDING: 'PENDING',
-  RESOLVED: 'RESOLVED',
-  REJECTED: 'REJECTED',
-};

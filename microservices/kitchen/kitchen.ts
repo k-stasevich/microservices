@@ -1,8 +1,11 @@
+import { ICreateOrderEvent, eventFactory } from './../events';
 import express from 'express';
 import bodyParser from 'body-parser';
 
 import { connectDB } from './../db-connect';
-import { initMessageBroker, getChannel, MAIN_QUEUE } from '../message-broker';
+import { initMessageBroker, getMainChannel, MAIN_QUEUE } from '../message-broker';
+import { EVENTS } from '../events';
+import { kitchenOrderRepository } from './db/kitchen-order.repository';
 
 const app = express();
 app.use(bodyParser.json());
@@ -45,13 +48,44 @@ Promise.all([
     console.log(`Kitchen app listening on port ${PORT}!`);
   });
 
-  const channel = getChannel();
+  const channel = getMainChannel();
 
   channel.consume(
     MAIN_QUEUE,
-    msg => {
-      if (msg) {
-        console.log(' [x] Received %s', msg.content.toString());
+    async msg => {
+      if (!msg) {
+        return;
+      }
+
+      let message;
+
+      try {
+        message = JSON.parse(msg.content.toString());
+      } catch (err) {
+        console.error('JSON parse error');
+        console.error('message: ', msg.content.toString());
+      }
+
+      console.log('NEW MSG', message);
+
+      if (message.event === EVENTS.CREATE_ORDER) {
+        const { orderId }: ICreateOrderEvent = message;
+
+        try {
+          const created = await kitchenOrderRepository.createKitchenOrder(orderId);
+
+          channel.sendToQueue(
+            MAIN_QUEUE,
+            Buffer.from(JSON.stringify(eventFactory.cookSuccess(orderId))),
+            { persistent: true },
+          );
+        } catch (err) {
+          channel.sendToQueue(
+            MAIN_QUEUE,
+            Buffer.from(JSON.stringify(eventFactory.cookError(orderId))),
+            { persistent: true },
+          );
+        }
       }
     },
     { noAck: true },
