@@ -1,4 +1,3 @@
-import axios from 'axios';
 import express from 'express';
 import bodyParser from 'body-parser';
 
@@ -51,7 +50,9 @@ Promise.all([
   channel.consume(
     MAIN_QUEUE,
     msg => {
-      console.log(' [x] Received %s', msg.content.toString());
+      if (msg) {
+        console.log(' [x] Received %s', msg.content.toString());
+      }
     },
     { noAck: true },
   );

@@ -1,5 +1,6 @@
+import { DeliveryAPI } from './../../API/delivery.api';
+import { KitchenAPI } from './../../API/kitchen.api';
 import express from 'express';
-import axios, { AxiosResponse } from 'axios';
 import bodyParser from 'body-parser';
 
 import { connectDB } from './../db-connect';
@@ -43,16 +44,5 @@ Promise.all([
   });
 });
 
-const kitchenAPI = {
-  async cook(orderId: number) {
-    const url = `${process.env.KITCHEN_URL}/cook`;
-    return axios.post(url, { orderId });
-  },
-};
-
-const deliverAPI = {
-  async deliver(orderId: number) {
-    const url = `${process.env.DELIVERY_URL}/deliver`;
-    return axios.post(url, { orderId });
-  },
-};
+const kitchenAPI = new KitchenAPI(process.env.KITCHEN_URL as string);
+const deliverAPI = new DeliveryAPI(process.env.DELIVERY_URL as string);
