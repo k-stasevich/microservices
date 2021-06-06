@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:delivery": "ts-node-dev --clear --rs ./src/delivery",
-    "start:kitchen": "ts-node-dev --clear --rs ./src/kitchen",
-    "start:orders": "ts-node-dev --clear --rs ./src/orders",
+    "compose": "docker-compose up",
+    "start:delivery": "ts-node-dev --rs ./src/delivery",
+    "start:kitchen": "ts-node-dev --rs ./src/kitchen",
+    "start:orders": "ts-node-dev --rs ./src/orders",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx"
   },
