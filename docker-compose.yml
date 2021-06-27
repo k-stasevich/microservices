@@ -18,34 +18,33 @@ services:
     build:
       context: ./
     volumes:
-      - .:/src
+      - .:/usr/src/app
     command: npm run start:delivery
     ports:
       - '3001:3001'
+    depends_on:
+      - rabbitmq
   kitchen_server:
     container_name: 'kitchen_server'
     build:
       context: ./
     volumes:
-      - .:/src
+      - .:/usr/src/app
     command: npm run start:kitchen
     ports:
       - '3002:3002'
+    depends_on:
+      - rabbitmq
   orders_server:
     container_name: 'orders_server'
     build:
       context: ./
     volumes:
-      - .:/src
+      - .:/usr/src/app
     command: npm run start:orders
     ports:
       - '3003:3003'
-    # depends_on:
-    #   - postgres
-    # environment:
-    # DATABASE_URL: postgres://todoapp@postgres/todos
-  # postgres:
-  #   image: postgres:9.6.2-alpine
-  #   environment:
-  #     POSTGRES_USER: todoapp
-  #     POSTGRES_DB: todos
+    env_file:
+      - ./src/orders/.docker.env
+    depends_on:
+      - rabbitmq

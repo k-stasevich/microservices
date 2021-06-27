@@ -5,5 +5,5 @@ COPY package*.json /
 
 ENV NODE_ENV=development
 RUN npm install
-COPY . /
-EXPOSE 3002
+COPY . .
+CMD ["npm", "run", "start:orders"]
