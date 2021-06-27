@@ -1,6 +1,20 @@
 version: '3'
 services:
+  rabbitmq:
+    container_name: 'rabbit'
+    image: rabbitmq:3-management
+    hostname: 'rabbit'
+    environment:
+      RABBITMQ_DEFAULT_USER: 'guest'
+      RABBITMQ_DEFAULT_PASS: 'guest'
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    volumes:
+      - ./rabbitmq/rabbitmq:/var/lib/rabbitmq
+      - ./rabbitmq/log/:/var/log/rabbitmq
   delivery_server:
+    container_name: 'delivery_server'
     build:
       context: ./
     volumes:
@@ -9,6 +23,7 @@ services:
     ports:
       - '3001:3001'
   kitchen_server:
+    container_name: 'kitchen_server'
     build:
       context: ./
     volumes:
@@ -17,6 +32,7 @@ services:
     ports:
       - '3002:3002'
   orders_server:
+    container_name: 'orders_server'
     build:
       context: ./
     volumes:
