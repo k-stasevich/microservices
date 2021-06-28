@@ -1,16 +1,18 @@
 import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
+import { connectToRmq } from './services/rabbitmq.service';
 
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const app = express();
 const { PORT, SERVICE } = process.env;
 
-app.get('/', (req, res) => {
-  res.send(`Hello ${SERVICE}!`);
-});
-
-app.listen(PORT, () => {
-  console.log(`${SERVICE} listening at http://localhost:${PORT}`);
+Promise.all([
+  //
+  connectToRmq(),
+]).then(() => {
+  app.listen(PORT, () => {
+    console.log(`${SERVICE} listening at http://localhost:${PORT}`);
+  });
 });
