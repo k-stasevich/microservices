@@ -1,6 +1,7 @@
 import { rmqService } from '../../services/rabbitmq.service';
 import { Event } from '../../../common/utils/event';
 import { EventRegistrator } from '../../../common/utils/event-registrator';
+import { QUEUE } from '../queue';
 
 interface IOrderCreatedOptions {
   id: string;
@@ -18,7 +19,7 @@ class OrderCreatedEvent implements Event<IOrderCreatedOptions, IOrderCreatedEven
   }
 
   async register() {
-    await rmqService.channel.assertQueue('ORDER_CREATED', { durable: true });
+    await rmqService.channel.assertQueue(QUEUE.ORDER_CREATED, { durable: true });
   }
 }
 

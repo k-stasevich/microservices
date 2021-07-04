@@ -1,0 +1,3 @@
+export enum QUEUE {
+  ORDER_CREATED = 'ORDER_CREATED',
+}
