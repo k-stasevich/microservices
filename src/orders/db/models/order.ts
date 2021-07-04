@@ -1,4 +1,5 @@
 import { Model, DataTypes, Optional } from 'sequelize';
+import { UUID } from '../../../common/utils/types';
 import { IModel } from '../../types/db';
 import { sequelize } from './index';
 
@@ -13,16 +14,13 @@ interface OrderAttributes {
 interface OrderCreationAttributes extends Optional<OrderAttributes, 'id'> {}
 
 /* eslint-disable-next-line @typescript-eslint/no-empty-interface */
-interface Order extends Model<OrderAttributes, OrderCreationAttributes> {
-  //   id!: number; // Note that the `null assertion` `!` is required in strict mode.
-  //   sum!: number;
-}
+interface Order extends Model<OrderAttributes, OrderCreationAttributes>, IModel {}
 
 export const Order = sequelize.define<Order>(
   'Order',
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      ...UUID,
       autoIncrement: true,
       primaryKey: true,
     },

@@ -1,12 +1,19 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
-import { Sequelize } from 'sequelize';
+import { Dialect, Sequelize } from 'sequelize';
 import { Order } from './order';
 
-const { DB_CONNECTION_STRING } = process.env;
-
-export const sequelize = new Sequelize(DB_CONNECTION_STRING as string);
+export const sequelize = new Sequelize(
+  process.env.DB_NAME as string,
+  process.env.DB_USER as string,
+  process.env.DB_PASSWORD as string,
+  {
+    dialect: process.env.DB_DIALECT as Dialect,
+    host: process.env.DB_HOST,
+    port: +(process.env.DB_PORT as string),
+  }
+);
 
 const basename = path.basename(__filename);
 

@@ -1,5 +1,5 @@
 export interface IModel {
   // timestamps!
-    readonly createdAt!: Date;
-    readonly updatedAt!: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
