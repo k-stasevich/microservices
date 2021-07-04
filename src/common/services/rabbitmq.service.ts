@@ -3,11 +3,17 @@ import { sleep } from '../utils';
 
 type ConnectOptions = Options.Connect;
 
-export class RmqService {
+export interface IRmqService {
+  connect(options: ConnectOptions): Promise<void>;
+  get connection(): amqp.Connection;
+  get channel(): amqp.Channel;
+}
+
+export class RmqService implements IRmqService {
   rmqConnection: null | amqp.Connection = null;
   rmqChannel: null | amqp.Channel = null;
 
-  async connect(options: ConnectOptions): Promise<void> {
+  async connect(options: ConnectOptions) {
     const connection = await connectWithRetry(options);
     const channel = await connection.createChannel();
     this.rmqConnection = connection;
