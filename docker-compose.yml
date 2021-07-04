@@ -13,6 +13,15 @@ services:
     volumes:
       - ./rabbitmq/rabbitmq:/var/lib/rabbitmq
       - ./rabbitmq/log/:/var/log/rabbitmq
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+
   delivery_server:
     container_name: 'delivery_server'
     build:
@@ -24,6 +33,7 @@ services:
       - '3001:3001'
     depends_on:
       - rabbitmq
+
   kitchen_server:
     container_name: 'kitchen_server'
     build:
@@ -35,6 +45,7 @@ services:
       - '3002:3002'
     depends_on:
       - rabbitmq
+
   orders_server:
     container_name: 'orders_server'
     build:
