@@ -3,8 +3,10 @@
 - [x] run all servers in docker (too see logs in a single place)
 - [x] add rabbitmq to the project
 - [x] add supertest and configure it to test express
-- [x] add db 
+- [x] add db
 - [ ] create a procedure supporting fallback scenario with transactions (cover it with tests)
+- [ ] [LOW PRIORITY] add comamnd to start all the services in compose from scratch, with database reset and migrations run
+- [ ] [LOW PRIORITY] run tests in CI
 
 # Questions
 

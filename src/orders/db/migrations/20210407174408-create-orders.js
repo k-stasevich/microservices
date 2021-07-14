@@ -4,16 +4,22 @@ module.exports = {
     return queryInterface.createTable(TABLE_NAME, {
       id: {
         type: Sequelize.UUID,
-        field: 'id',
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
       },
       sum: {
-        type: Sequelize.STRING,
-        field: 'name',
+        type: Sequelize.DECIMAL,
         allowNull: false,
         unique: true,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
     });
   },

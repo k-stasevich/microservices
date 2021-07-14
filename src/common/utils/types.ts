@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize/types';
+import { DataTypes } from 'sequelize';
 
 export const UUID = {
   type: DataTypes.UUID,

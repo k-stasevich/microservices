@@ -1,11 +1,12 @@
 import { Model, DataTypes, Optional } from 'sequelize';
+import { sequelizeTimestamps } from '../../../common/utils/sequelize';
 import { UUID } from '../../../common/utils/types';
 import { IModel } from '../../types/db';
 import { sequelize } from './index';
 
 // These are all the attributes in the Order model
-interface OrderAttributes {
-  id: number;
+export interface OrderAttributes {
+  id: string;
   sum: number;
 }
 
@@ -25,9 +26,10 @@ export const Order = sequelize.define<Order>(
       primaryKey: true,
     },
     sum: {
-      type: new DataTypes.DECIMAL(),
+      type: DataTypes.DECIMAL(),
       allowNull: false,
     },
+    ...sequelizeTimestamps,
   },
   {
     tableName: 'orders',

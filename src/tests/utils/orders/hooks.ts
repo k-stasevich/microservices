@@ -1,6 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config({ path: path.resolve(__dirname, '..', '..', '..', 'orders', '.env') });
-import path from 'path';
+import { sequelize } from '../../../orders/db/models';
 import { rmqService } from '../../../orders/services/rabbitmq.service';
 import { initServer } from './request';
 
@@ -9,5 +7,9 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await rmqService.connection.close();
+  await Promise.all([
+    //
+    rmqService.connection.close(),
+    sequelize.close(),
+  ]);
 });
